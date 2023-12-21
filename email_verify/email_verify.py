@@ -1,7 +1,7 @@
 from urllib.parse import urlencode
 
 from .single_verify_req_opts import SingleVerifyReqOpts
-from lib.lib import Lib
+from lib import Lib
 from lib.req_opts import ReqOpts
 
 
