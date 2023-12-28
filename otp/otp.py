@@ -41,7 +41,7 @@ class Otp:
         }
 
         t_url = self.lib.prepare_url("/api/otp/v1/send", qp, opt.req_opts)
-        resp = self.lib.req_and_resp(t_url, opt.req_opts, method='POST')
+        resp = self.lib.req_and_resp(t_url, opt.req_opts, method='POST', data=qp)
 
         return OtpResp(**json.loads(resp))
 
@@ -61,6 +61,6 @@ class Otp:
         }
 
         t_url = self.lib.prepare_url("/api/otp/v1/send", qp, opt.req_opts)
-        resp = self.lib.req_and_resp(t_url, opt.req_opts, method='POST')
+        resp = self.lib.req_and_resp(t_url, opt.req_opts, method='POST', data=qp)
 
         return OtpResp(**json.loads(resp))
