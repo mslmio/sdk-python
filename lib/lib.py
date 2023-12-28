@@ -42,17 +42,26 @@ class Lib:
 
         return urlparse(http_url_builder.geturl())
 
-    def req_and_resp(self, t_url, opt):
+    def req_and_resp(self, t_url, opt, method='GET', data=None):
         headers = {"User-Agent": opt.get_user_agent()}
-        response = self.http.get(t_url.geturl(), headers=headers)
 
-        json_data = response.text
+        if method.upper() == 'GET':
+            response = self.http.get(t_url.geturl(), headers=headers)
+        elif method.upper() == 'POST':
+            headers["Content-Type"] = "application/json"
+            json_data = json.dumps(data) if data else None
+            response = self.http.post(t_url.geturl(), headers=headers, data=json_data)
+        else:
+            raise ValueError("Invalid HTTP method. Supported methods are GET and POST.")
 
         # Assuming json_data is a string containing JSON data
-        data_dict = json.loads(json_data)
+        return response.text
 
-        # Assuming SingleVerifyResp is a class or dictionary containing the structure you expect
-        single_verify_resp = SingleVerifyResp(**data_dict)
+# # Assuming SingleVerifyResp is a class or dictionary containing the structure you expect
+# single_verify_resp = SingleVerifyResp(**json.loads(json_response))
+#
+# # Now, you can use the parsed SingleVerifyResp object
+# return single_verify_resp
 
-        # Now, you can use the parsed SingleVerifyResp object
-        return single_verify_resp
+
+

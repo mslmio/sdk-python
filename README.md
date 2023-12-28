@@ -12,13 +12,26 @@ pip install mslm
 
 ```python
 from mslm import Mslm
+from otp.otp_req import OtpReq
 
 m = Mslm("api_key")
 
-resp = m.email_verify.single_verify("support@mslm.io")
+# Email Verify
+ev_resp = m.email_verify.single_verify("support@mslm.io")
 
-print(resp)
+# Otp
+otp_req = OtpReq(
+    phone="+923214444444",
+    tmpl_sms="Your verification code is {token}",
+    token_len=6,
+    expire_seconds=300
+)
+
+otp_resp = m.otp.send_otp(otp_req)
 ```
+
+### OTP
+```python
 
 ## About Mslm
 

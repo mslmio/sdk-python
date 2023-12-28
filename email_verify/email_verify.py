@@ -1,8 +1,10 @@
+import json
 from urllib.parse import urlencode
 
 from .single_verify_req_opts import SingleVerifyReqOpts
 from lib import Lib
 from lib.req_opts import ReqOpts
+from .single_verify_resp import SingleVerifyResp
 
 
 class EmailVerify:
@@ -34,7 +36,10 @@ class EmailVerify:
         qp = {"email": email}
 
         t_url = self.lib.prepare_url("/api/sv/v1", qp, opt.req_opts)
-        return self.lib.req_and_resp(t_url, opt.req_opts)
+        resp = self.lib.req_and_resp(t_url, opt.req_opts)
+
+        # Assuming SingleVerifyResp is a class or dictionary containing the structure you expect
+        return SingleVerifyResp(**json.loads(resp))
 
     def single_verify_with_opts(self, email, opts=None):
         opt = SingleVerifyReqOpts.Builder().with_req_opts(
@@ -50,4 +55,7 @@ class EmailVerify:
         qp = {"email": email}
 
         t_url = self.lib.prepare_url("/api/sv/v1", qp, opt.req_opts)
-        return self.lib.req_and_resp(t_url, opt.req_opts)
+        resp = self.lib.req_and_resp(t_url, opt.req_opts)
+
+        # Assuming SingleVerifyResp is a class or dictionary containing the structure you expect
+        return SingleVerifyResp(**json.loads(resp))
