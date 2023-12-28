@@ -47,7 +47,7 @@ otp_req = OtpReq(
 )
 
 otp_resp = m.otp.send_otp(otp_req)
-print(otp_resp) #OtpsResp{code='1000', message='Successfully sent SMS.'}
+print(otp_resp) #OtpResp{code='1000', message='Successfully sent SMS.'}
 ```
 
 ## About Mslm

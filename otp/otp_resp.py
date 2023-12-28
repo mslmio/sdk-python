@@ -7,4 +7,4 @@ class OtpResp:
     msg: str
 
     def __str__(self):
-        return f"OtpsResp{{code='{self.code}', message='{self.msg}'}}"
+        return f"OtpResp{{code='{self.code}', message='{self.msg}'}}"
