@@ -18,6 +18,25 @@ m = Mslm("api_key")
 
 # Email Verify
 ev_resp = m.email_verify.single_verify("support@mslm.io")
+print(ev_resp)
+# SingleVerifyResp{
+#   email='support@mslm.io',
+#   username='support', 
+#   domain='mslm.io', 
+#   malformed=False, 
+#   suggestion='', 
+#   status='real',
+#   has_mailbox=True, 
+#   accept_all=False, 
+#   disposable=False, 
+#   free=True, 
+#   role=False, 
+#   mx=[
+#   {'host': 'ASPMX.L.GOOGLE.COM.', 'pref': 1}, 
+#   {'host': 'ALT1.ASPMX.L.GOOGLE.COM.', 'pref': 5}, 
+#   ...
+#   ]}
+
 
 # Otp
 otp_req = OtpReq(
@@ -28,6 +47,7 @@ otp_req = OtpReq(
 )
 
 otp_resp = m.otp.send_otp(otp_req)
+print(otp_resp) #OtpsResp{code='1000', message='Successfully sent SMS.'}
 ```
 
 ## About Mslm
