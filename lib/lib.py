@@ -56,12 +56,3 @@ class Lib:
 
         # Assuming json_data is a string containing JSON data
         return response.text
-
-# # Assuming SingleVerifyResp is a class or dictionary containing the structure you expect
-# single_verify_resp = SingleVerifyResp(**json.loads(json_response))
-#
-# # Now, you can use the parsed SingleVerifyResp object
-# return single_verify_resp
-
-
-
