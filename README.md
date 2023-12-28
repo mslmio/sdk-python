@@ -30,9 +30,6 @@ otp_req = OtpReq(
 otp_resp = m.otp.send_otp(otp_req)
 ```
 
-### OTP
-```python
-
 ## About Mslm
 
 mslm focuses on producing world-class business solutions. It’s the
