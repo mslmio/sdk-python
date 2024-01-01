@@ -5,25 +5,27 @@ from lib.req_opts import ReqOpts
 
 @dataclass
 class OtpReqOpts:
+    """
+    Data class representing options for OTP requests.
+
+    Attributes:-
+        - req_opts (ReqOpts): Request options for OTP operations.
+        - disable_url_encode (Optional[bool]): Flag indicating whether URL encoding should be disabled (optional).
+
+    Usage:
+        otp_req_opts = OtpReqOpts(req_opts=req_opts_instance, disable_url_encode=True)
+    """
+
     req_opts: ReqOpts
     disable_url_encode: Optional[bool]
 
     def __init__(self, req_opts: ReqOpts, disable_url_encode: Optional[bool] = None):
+        """
+        Initialize an OtpReqOpts object with the specified attributes.
+
+        Parameters:-
+            - req_opts (ReqOpts): Request options for OTP operations.
+            - disable_url_encode (Optional[bool]): Flag indicating whether URL encoding should be disabled (optional).
+        """
         self.req_opts = req_opts
         self.disable_url_encode = disable_url_encode
-
-    # Builder class for OtpReqOpts.
-    class Builder:
-        def __init__(self):
-            self.opts = OtpReqOpts(req_opts=ReqOpts(), disable_url_encode=False)
-
-        def with_req_opts(self, req_opts: ReqOpts):
-            self.opts.req_opts = req_opts
-            return self
-
-        def with_disable_url_encode(self, disable_url_encode: bool):
-            self.opts.disable_url_encode = disable_url_encode
-            return self
-
-        def build(self):
-            return self.opts
