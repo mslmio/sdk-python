@@ -1,6 +1,7 @@
 from typing import Optional
 from dataclasses import dataclass
-from lib.req_opts import ReqOpts
+
+from lib import ReqOpts
 
 
 @dataclass

@@ -1,11 +1,8 @@
 import json
-
 from urllib.parse import urlencode
-from lib import Lib
-from lib.req_opts import ReqOpts
 
-from .single_verify_resp import SingleVerifyResp
-from .single_verify_req_opts import SingleVerifyReqOpts
+from lib import Lib, ReqOpts
+from email_verify import SingleVerifyResp, SingleVerifyReqOpts
 
 
 class EmailVerify:

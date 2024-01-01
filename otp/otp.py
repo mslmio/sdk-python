@@ -1,9 +1,6 @@
 import json
-from lib import Lib
-from lib.req_opts import ReqOpts
-from otp.otp_req import OtpReq
-from otp.otp_req_opts import OtpReqOpts
-from otp.otp_resp import OtpResp
+from lib import Lib, ReqOpts
+from otp import OtpReq, OtpReqOpts, OtpResp
 
 
 class Otp:
