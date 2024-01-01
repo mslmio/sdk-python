@@ -36,8 +36,8 @@ class Lib:
         """
         self.api_key = api_key
         self.http = Session()
-        self.base_url = urlparse("https://example.com")
-        self.user_agent = self.get_user_agent("example_service")
+        self.base_url = urlparse("https://mslm.io")
+        self.user_agent = self.get_user_agent("mslm")
 
     def set_http_client(self, http_client):
         """

@@ -98,7 +98,6 @@ class EmailVerify:
         t_url = self.lib.prepare_url("/api/sv/v1", qp, opt.req_opts)
         resp = self.lib.req_and_resp(t_url, opt.req_opts)
 
-        print(resp)
         return SingleVerifyResp(**json.loads(resp))
 
     def single_verify_with_opts(self, email, opts=None):
