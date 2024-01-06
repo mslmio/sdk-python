@@ -1,8 +1,9 @@
 import json
 from urllib.parse import urlencode
 
-from lib import Lib, ReqOpts
-from email_verify import SingleVerifyResp, SingleVerifyReqOpts
+from lib import Lib, ReqOpts, Error, RequestQuotaExceededError
+from .single_verify_resp import SingleVerifyResp
+from .single_verify_req_opts import SingleVerifyReqOpts
 
 
 class EmailVerify:
@@ -78,8 +79,9 @@ class EmailVerify:
         Parameters:-
             - email (str): The email address to be verified.
 
-        Returns:
+        Returns:-
             - SingleVerifyResp: An object representing the response of the email verification.
+            - Exception: An object representing and error during the API request.
         """
         opt = SingleVerifyReqOpts.Builder().with_req_opts(
             ReqOpts.Builder()
@@ -94,8 +96,15 @@ class EmailVerify:
 
         t_url = self.lib.prepare_url("/api/sv/v1", qp, opt.req_opts)
         resp = self.lib.req_and_resp(t_url, opt.req_opts)
+        resp_data = json.loads(resp.text)
 
-        return SingleVerifyResp(**json.loads(resp))
+        status_code = resp.status_code
+        if status_code == 429:
+            return None, RequestQuotaExceededError()
+        elif status_code != 200:
+            return None, Error(status_code, "API request failed")
+
+        return SingleVerifyResp(**resp_data), None
 
     def single_verify_with_opts(self, email, opts=None):
         """
@@ -105,8 +114,9 @@ class EmailVerify:
             - email (str): The email address to be verified.
             - opts (SingleVerifyReqOpts): Optional request options for customization.
 
-        Returns:
+        Returns:-
             - SingleVerifyResp: An object representing the response of the email verification.
+            - Exception: An object representing and error during the API request.
         """
         opt = SingleVerifyReqOpts.Builder().with_req_opts(
             ReqOpts.Builder().build()
@@ -122,5 +132,12 @@ class EmailVerify:
 
         t_url = self.lib.prepare_url("/api/sv/v1", qp, opt.req_opts)
         resp = self.lib.req_and_resp(t_url, opt.req_opts)
+        resp_data = json.loads(resp.text)
 
-        return SingleVerifyResp(**json.loads(resp))
+        status_code = resp.status_code
+        if status_code == 429:
+            return None, RequestQuotaExceededError()
+        elif status_code != 200:
+            return None, Error(status_code, "API request failed")
+
+        return SingleVerifyResp(**resp_data), None

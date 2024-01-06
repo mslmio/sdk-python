@@ -25,7 +25,7 @@ class Lib:
         - req_and_resp(self, t_url, opt, method='GET', data=None): Makes an HTTP request and returns the response.
     """
 
-    gson = None  # Assuming you have a Gson-like library in Python
+    gson = None
 
     def __init__(self, api_key: Optional[str] = ""):
         """
@@ -134,5 +134,4 @@ class Lib:
         else:
             raise ValueError("Invalid HTTP method. Supported methods are GET and POST.")
 
-        # Assuming json_data is a string containing JSON data
-        return response.text
+        return response

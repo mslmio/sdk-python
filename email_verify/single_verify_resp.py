@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
-from email_verify import SingleVerifyRespMx
+from .single_verify_resp_mx import SingleVerifyRespMx
 
 
 @dataclass

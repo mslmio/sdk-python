@@ -12,7 +12,6 @@ pip install mslm
 
 ```python
 from mslm import Mslm
-from otp.otp_req import OtpReq
 
 m = Mslm("api_key")
 
@@ -39,20 +38,20 @@ print(ev_resp)
 
 
 # Otp
-otp_req = OtpReq(
+otp_req = m.otp.otpReq(
     phone="+923214444444",
     tmpl_sms="Your verification code is {token}",
     token_len=6,
     expire_seconds=300
 )
 
-otp_resp = m.otp.send_otp(otp_req)
-print(otp_resp) #OtpResp{code='1000', message='Successfully sent SMS.'}
+otp_resp = m.otp.send(otp_req)
+print(otp_resp)  # OtpResp{code='1000', message='Successfully sent SMS.'}
 ```
 
 ## About Mslm
 
-mslm focuses on producing world-class business solutions. It’s the
+Mslm focuses on producing world-class business solutions. It’s the
 bread-and-butter of our business to prioritize quality on everything we touch.
 Excellence is a core value that defines our culture from top to bottom.
 

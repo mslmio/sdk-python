@@ -1,6 +1,9 @@
 import json
-from lib import Lib, ReqOpts
-from otp import OtpReq, OtpReqOpts, OtpResp
+
+from lib import Lib, ReqOpts, Error, RequestQuotaExceededError
+from .otp_req import OtpReq
+from .otp_req_opts import OtpReqOpts
+from .otp_resp import OtpResp
 
 
 class Otp:
@@ -16,8 +19,8 @@ class Otp:
         - set_base_url(self, base_url_str): Sets the base URL for the Otp service.
         - set_user_agent(self, user_agent): Sets the user agent for the Otp service.
         - set_api_key(self, api_key): Sets the API key for the Otp service.
-        - send_otp(self, otp_req: OtpReq): Sends an OTP using the provided OTP request.
-        - send_otp_with_opts(self, otp_req: OtpReq, opts=None): Sends an OTP with custom options.
+        - send(self, otp_req: OtpReq): Sends an OTP using the provided OTP request.
+        - send_with_opts(self, otp_req: OtpReq, opts=None): Sends an OTP with custom options.
     """
 
     def __init__(self, api_key=None):
@@ -28,6 +31,9 @@ class Otp:
             - api_key (str): The API key used for authentication (optional).
         """
         self.lib = Lib(api_key)
+        self.OtpReq = OtpReq
+        self.OtpReqOpts = OtpReqOpts
+        self.OtpResp = OtpResp
 
     def set_http_client(self, http_client):
         """
@@ -65,7 +71,7 @@ class Otp:
         """
         self.lib.set_api_key(api_key)
 
-    def send_otp(self, otp_req: OtpReq):
+    def send(self, otp_req: OtpReq):
         """
         Sends an OTP using the provided OTP request.
 
@@ -93,10 +99,17 @@ class Otp:
 
         t_url = self.lib.prepare_url("/api/otp/v1/send", qp, opt.req_opts)
         resp = self.lib.req_and_resp(t_url, opt.req_opts, method='POST', data=qp)
+        resp_data = json.loads(resp.text)
 
-        return OtpResp(**json.loads(resp))
+        status_code = resp.status_code
+        if status_code == 429:
+            return None, RequestQuotaExceededError()
+        elif status_code != 200:
+            return None, Error(status_code, resp_data.get("msg", "API request failed"))
 
-    def send_otp_with_opts(self, otp_req: OtpReq, opts=None):
+        return OtpResp(**resp_data), None
+
+    def send_with_opts(self, otp_req: OtpReq, opts=None):
         """
         Sends an OTP with custom options.
 
@@ -104,8 +117,9 @@ class Otp:
             - otp_req (OtpReq): The OTP request containing details for sending OTP.
             - opts: Custom options for the OTP sending operation (optional).
 
-        Returns:
+        Returns:-
             - OtpResp: An object representing the response of the OTP sending operation.
+            - Error: An object representing the error response of the OTP sending operation.
         """
         opt = OtpReqOpts.Builder().with_req_opts(
             ReqOpts.Builder().build()
@@ -123,5 +137,12 @@ class Otp:
 
         t_url = self.lib.prepare_url("/api/otp/v1/send", qp, opt.req_opts)
         resp = self.lib.req_and_resp(t_url, opt.req_opts, method='POST', data=qp)
+        resp_data = json.loads(resp.text)
 
-        return OtpResp(**json.loads(resp))
+        status_code = resp.status_code
+        if status_code == 429:
+            return None, RequestQuotaExceededError()
+        elif status_code != 200:
+            return None, Error(status_code, resp_data.get("msg", "API request failed"))
+
+        return OtpResp(**resp_data), None
