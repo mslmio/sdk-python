@@ -1,9 +1,7 @@
 import json
-from urllib.parse import urlencode
 
-from lib import Lib, ReqOpts, Error, RequestQuotaExceededError
+from lib import Lib, ReqOpts, MslmError, RequestQuotaExceededError
 from .single_verify_resp import SingleVerifyResp
-from .single_verify_req_opts import SingleVerifyReqOpts
 
 
 class EmailVerify:
@@ -11,30 +9,35 @@ class EmailVerify:
     Class for performing email verification using an API.
 
     Attributes:-
-        - lib (Lib): The underlying library for making API requests.
+        - _lib (Lib): Instance of the Lib utility for handling HTTP requests and responses.
+
+    Note:
+    The '_lib' attribute is considered private and should not be accessed directly from outside the class.
 
     Methods:-
-        - __init__(self, api_key=None): Initializes an EmailVerify object with an optional API key.
+        - __init__(self, api_key:str=None): Initializes an EmailVerify object with an API key.
         - set_http_client(self, http_client): Sets the HTTP client to be used for making requests.
-        - set_base_url(self, base_url_str): Sets the base URL for API requests.
         - set_user_agent(self, user_agent): Sets the user agent to be used in HTTP requests.
         - set_api_key(self, api_key): Sets the API key for authentication.
-        - single_verify(self, email): Performs a single email verification using the specified email address.
-        - single_verify_with_opts(self, email, opts=None): Performs a single email verification with optional request options.
+        - single_verify(self, email:str, opts:SingleVerifyReqOpts=None)-> (SingleVerifyResp, Error): Performs a single email verification with optional request options.
 
     Usage:-
         email_verifier = EmailVerify(api_key="your_api_key")
-        email_verifier.single_verify("example@example.com")
+        ev_resp, ev_err = email_verifier.single_verify("example@example.com")
+
+        # Using custom request options
+        opts = email_verifier.SingleVerifyReqOpts.Builder().with_disable_url_encode(True).build()
+        ev_resp, ev_err = email_verifier.single_verify("example@example.com", opts)
     """
 
-    def __init__(self, api_key=None):
+    def __init__(self, api_key:str):
         """
-        Initializes an EmailVerify object with an optional API key.
+        Initializes an EmailVerify object with an API key.
 
         Parameters:-
             - api_key (str): The API key used for authentication.
         """
-        self.lib = Lib(api_key)
+        self._lib = Lib(api_key) # Private attribute
 
     def set_http_client(self, http_client):
         """
@@ -43,16 +46,7 @@ class EmailVerify:
         Parameters:-
             - http_client: The HTTP client object.
         """
-        self.lib.set_http_client(http_client)
-
-    def set_base_url(self, base_url_str):
-        """
-        Sets the base URL for API requests.
-
-        Parameters:-
-            - base_url_str (str): The base URL for API requests.
-        """
-        self.lib.set_base_url(base_url_str)
+        self._lib.set_http_client(http_client)
 
     def set_user_agent(self, user_agent):
         """
@@ -61,83 +55,49 @@ class EmailVerify:
         Parameters:-
             - user_agent (str): The user agent string.
         """
-        self.lib.set_user_agent(user_agent)
+        self._lib.set_user_agent(user_agent)
 
-    def set_api_key(self, api_key):
+    def set_api_key(self, api_key:str):
         """
         Sets the API key for authentication.
 
         Parameters:-
             - api_key (str): The API key used for authentication.
         """
-        self.lib.set_api_key(api_key)
+        self._lib.set_api_key(api_key)
 
-    def single_verify(self, email):
-        """
-        Performs a single email verification using the specified email address.
-
-        Parameters:-
-            - email (str): The email address to be verified.
-
-        Returns:-
-            - SingleVerifyResp: An object representing the response of the email verification.
-            - Exception: An object representing and error during the API request.
-        """
-        opt = SingleVerifyReqOpts.Builder().with_req_opts(
-            ReqOpts.Builder()
-            .with_api_key(self.lib.api_key)
-            .with_base_url(self.lib.base_url)
-            .with_http_client(self.lib.http)
-            .with_user_agent(self.lib.user_agent)
-            .build()
-        ).build()
-
-        qp = {"email": email}
-
-        t_url = self.lib.prepare_url("/api/sv/v1", qp, opt.req_opts)
-        resp = self.lib.req_and_resp(t_url, opt.req_opts)
-        resp_data = json.loads(resp.text)
-
-        status_code = resp.status_code
-        if status_code == 429:
-            return None, RequestQuotaExceededError()
-        elif status_code != 200:
-            return None, Error(status_code, "API request failed")
-
-        return SingleVerifyResp(**resp_data), None
-
-    def single_verify_with_opts(self, email, opts=None):
+    def single_verify(self, email:str, opts:ReqOpts=None)-> (SingleVerifyResp, MslmError):
         """
         Performs a single email verification with optional request options.
 
         Parameters:-
             - email (str): The email address to be verified.
-            - opts (SingleVerifyReqOpts): Optional request options for customization.
+            - opts (ReqOpts): Optional request options for customization.
 
         Returns:-
             - SingleVerifyResp: An object representing the response of the email verification.
             - Exception: An object representing and error during the API request.
         """
-        opt = SingleVerifyReqOpts.Builder().with_req_opts(
-            ReqOpts.Builder().build()
-        ).build()
+        opt = (ReqOpts.Builder()
+                .with_api_key(self._lib.api_key)
+                .with_base_url(self._lib.base_url)
+                .with_http_client(self._lib.http)
+                .with_user_agent(self._lib.user_agent)
+                .build())
 
         if opts:
             opt = opts
 
-        if opt.disable_url_encode is not None and not opt.disable_url_encode:
-            email = urlencode({"email": email})[6:]
-
         qp = {"email": email}
 
-        t_url = self.lib.prepare_url("/api/sv/v1", qp, opt.req_opts)
-        resp = self.lib.req_and_resp(t_url, opt.req_opts)
+        t_url = self._lib.prepare_url("/api/sv/v1", qp, opt)
+        resp = self._lib.req_and_resp(t_url, opt)
         resp_data = json.loads(resp.text)
 
         status_code = resp.status_code
         if status_code == 429:
             return None, RequestQuotaExceededError()
-        elif status_code != 200:
-            return None, Error(status_code, "API request failed")
+        if status_code != 200:
+            return None, MslmError(status_code, "API request failed")
 
         return SingleVerifyResp(**resp_data), None

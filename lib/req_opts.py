@@ -1,5 +1,5 @@
-from requests import Session
 from urllib.parse import urlparse, urlunparse, ParseResult
+from requests import Session
 
 
 class ReqOpts:

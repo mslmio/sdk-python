@@ -1,5 +1,4 @@
 import json
-from typing import Optional
 from urllib.parse import urlparse
 from requests import Session
 
@@ -9,7 +8,7 @@ class Lib:
     Generic utility class for handling HTTP requests and responses.
 
     Attributes:-
-        - api_key (Optional[str]): The API key used for authentication.
+        - api_key (str): The API key used for authentication.
         - http (Session): The HTTP session object for making requests.
         - base_url (ParseResult): Parsed URL for the base endpoint of the API.
         - user_agent (str): The user agent string used in HTTP headers.
@@ -27,12 +26,12 @@ class Lib:
 
     gson = None
 
-    def __init__(self, api_key: Optional[str] = ""):
+    def __init__(self, api_key:str):
         """
         Initializes a Lib object with an optional API key.
 
         Parameters:-
-            - api_key (Optional[str]): The API key used for authentication.
+            - api_key (str): The API key used for authentication.
         """
         self.api_key = api_key
         self.http = Session()

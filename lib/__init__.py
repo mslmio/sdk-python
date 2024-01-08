@@ -1,3 +1,3 @@
 from .lib import Lib
 from .req_opts import ReqOpts
-from .error import Error, RequestQuotaExceededError
+from .mslm_errors import MslmError, RequestQuotaExceededError
