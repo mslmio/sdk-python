@@ -13,7 +13,7 @@ class OtpSendReq:
         - expire_seconds (int): Time duration in seconds for which the OTP is valid.
 
     Usage:
-        otp_request = OtpSendReq(phone="1234567890", tmpl_sms="Your OTP is: {otp}", token_len=6, expire_seconds=300)
+        otp_request = OtpSendReq(phone="1234567890", tmpl_sms="Your OTP is: {mslm_otp}", token_len=6, expire_seconds=300)
     """
 
     phone: str

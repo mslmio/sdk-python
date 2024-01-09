@@ -1,13 +1,14 @@
-from email_verify import EmailVerify
-from otp import Otp
+from mslm_email_verify import EmailVerify
+from mslm_otp import Otp
+
 
 class Mslm:
     """
     Central service orchestrating and facilitating access to other services within the Mslm.
 
     Attributes:-
-        - email_verify (EmailVerify): Instance of the EmailVerify service.
-        - otp (Otp): Instance of the Otp service.
+        - mslm_email_verify (EmailVerify): Instance of the EmailVerify service.
+        - mslm_otp (Otp): Instance of the Otp service.
 
     Methods:-
         - __init__(self, api_key:str): Constructor method to initialize Mslm object.

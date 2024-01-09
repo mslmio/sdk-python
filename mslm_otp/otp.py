@@ -26,7 +26,7 @@ class Otp:
 
     Usage:-
         o = Otp(api_key="your_api_key")
-        otp_req = o.OtpReq(phone="1234567890", tmpl_sms="Your OTP is: {otp}", token_len=6, expire_seconds=300)
+        otp_req = o.OtpReq(phone="1234567890", tmpl_sms="Your OTP is: {mslm_otp}", token_len=6, expire_seconds=300)
         otp_resp, otp_err = o.send(otp_req)
 
         # Using custom request options
@@ -101,7 +101,7 @@ class Otp:
             "expire_seconds": otp_req.expire_seconds
         }
 
-        t_url = self._lib.prepare_url("/api/otp/v1/send", qp, opt)
+        t_url = self._lib.prepare_url("/api/mslm_otp/v1/send", qp, opt)
         resp = self._lib.req_and_resp(t_url, opt, method='POST', data=qp)
         resp_data = json.loads(resp.text)
 
@@ -141,7 +141,7 @@ class Otp:
             "consume": otp_token_req.consume
         }
 
-        t_url = self._lib.prepare_url("/api/otp/v1/token_verify", qp, opt)
+        t_url = self._lib.prepare_url("/api/mslm_otp/v1/token_verify", qp, opt)
         resp = self._lib.req_and_resp(t_url, opt, method='POST', data=qp)
         resp_data = json.loads(resp.text)
 

@@ -3,10 +3,25 @@
 The official Python SDK for the Mslm APIs.
 
 ## Installation
-
+To install the main library, use the following command:
 ```bash
-pip install mslm
+pip install .\mslm
 ```
+
+Alternatively, you can install each service individually:
+
+### Email Verify:
+```bash
+pip install .\mslm_email_verify
+```
+
+### OTP:
+```bash
+pip install .\mslm_otp
+```
+Choose the specific service(s) you need based on your 
+requirements and enjoy seamless integration into your project.
+
 
 ## Usage
 ```python
@@ -52,19 +67,21 @@ mslm_instance = mslm.Mslm("api_key")
 
 Each service can be imported individually as well.
 #### Email Verify
+
 ```python
-import email_verify
+import mslm_email_verify
 
 # Initialize the EmailVerify object with your API key.
-ev = email_verify.EmailVerify("api_key")
+ev = mslm_email_verify.EmailVerify("api_key")
 ```
 
 #### OTP
+
 ```python
-import otp
+import mslm_otp
 
 # Initialize the Otp object with your API key.
-o = otp.Otp("api_key")
+o = mslm_otp.Otp("api_key")
 ```
 
 
