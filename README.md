@@ -102,13 +102,12 @@ These errors can be accessed as follows:
 - `mslm.RequestQuotaExceededError`
 
 #### Email Verify
-- `email_verify.MslmError`
-- `email_verify.RequestQuotaExceededError`
+- `mslm_email_verify.MslmError`
+- `mslm_email_verify.RequestQuotaExceededError`
 
 #### OTP
-- `otp.MslmError`
-- `otp.RequestQuotaExceededError`
-
+- `mslm_otp.MslmError`
+- `mslm_otp.RequestQuotaExceededError`
 
 
 ## About Mslm
