@@ -1,2 +1,2 @@
-from lib import RequestQuotaExceededError
+from lib import RequestQuotaExceededError, MslmError
 from .mslm import Mslm
