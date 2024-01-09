@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='mslm_otp',
+    name='mslm-otp',
     version='1.0.0',
     description='Mslm OTP Python Library',
     packages=['mslm_otp', 'lib'],

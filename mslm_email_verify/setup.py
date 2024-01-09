@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='mslm_email_verify',
+    name='mslm-email-verify',
     version='1.0.0',
     description='Mslm Email Verify Python Library',
     packages=['mslm_email_verify', 'lib'],
