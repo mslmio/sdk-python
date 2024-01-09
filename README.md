@@ -87,7 +87,7 @@ o = mslm_otp.Otp("api_key")
 
 ### Error Handling
 
-We expose the following error types in the Mslm library:
+We expose the following error types in the SDK:
 
 #### Common Errors
 - `MslmError`: The base error type.
