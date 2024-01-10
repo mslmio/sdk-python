@@ -22,7 +22,13 @@ class ReqOpts:
         - Builder: Nested builder class for constructing instances of ReqOpts.
     """
 
-    def __init__(self, api_key="", http=None, base_url="https://mslm.io", user_agent="mslm"):
+    def __init__(
+        self,
+        api_key="",
+        http=None,
+        base_url="https://mslm.io",
+        user_agent="mslm",
+    ):
         """
         Initializes a ReqOpts object with default or provided values.
 

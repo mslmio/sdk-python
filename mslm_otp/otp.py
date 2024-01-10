@@ -42,7 +42,7 @@ class Otp:
             - api_key (str): The API key used for authentication (optional).
         """
 
-        self._lib = Lib(api_key) # Private attribute
+        self._lib = Lib(api_key)  # Private attribute
 
     def set_http_client(self, http_client):
         """
@@ -71,7 +71,9 @@ class Otp:
         """
         self._lib.set_api_key(api_key)
 
-    def send(self, otp_req: OtpSendReq, opts: ReqOpts=None) -> (OtpSendResp, MslmError):
+    def send(
+        self, otp_req: OtpSendReq, opts: ReqOpts = None
+    ) -> (OtpSendResp, MslmError):
         """
         Sends an OTP with custom options.
 
@@ -84,12 +86,14 @@ class Otp:
             - Error: An object representing the error response of the OTP sending operation.
         """
 
-        opt = (ReqOpts.Builder()
-               .with_api_key(self._lib.api_key)
-               .with_base_url(self._lib.base_url)
-               .with_http_client(self._lib.http)
-               .with_user_agent(self._lib.user_agent)
-               .build())
+        opt = (
+            ReqOpts.Builder()
+            .with_api_key(self._lib.api_key)
+            .with_base_url(self._lib.base_url)
+            .with_http_client(self._lib.http)
+            .with_user_agent(self._lib.user_agent)
+            .build()
+        )
 
         if opts:
             opt = opts
@@ -98,23 +102,26 @@ class Otp:
             "phone": otp_req.phone,
             "tmpl_sms": otp_req.tmpl_sms,
             "token_len": otp_req.token_len,
-            "expire_seconds": otp_req.expire_seconds
+            "expire_seconds": otp_req.expire_seconds,
         }
 
         t_url = self._lib.prepare_url("/api/mslm_otp/v1/send", qp, opt)
-        resp = self._lib.req_and_resp(t_url, opt, method='POST', data=qp)
+        resp = self._lib.req_and_resp(t_url, opt, method="POST", data=qp)
         resp_data = json.loads(resp.text)
 
         status_code = resp.status_code
         if status_code == 429:
             return None, RequestQuotaExceededError()
         if status_code != 200:
-            return None, MslmError(status_code, resp_data.get("msg", "API request failed"))
+            return None, MslmError(
+                status_code, resp_data.get("msg", "API request failed")
+            )
 
         return OtpSendResp(**resp_data), None
 
-
-    def verify(self, otp_token_req: OtpTokenVerifyReq, opts: ReqOpts = None) -> (OtpTokenVerifyResp, MslmError):
+    def verify(
+        self, otp_token_req: OtpTokenVerifyReq, opts: ReqOpts = None
+    ) -> (OtpTokenVerifyResp, MslmError):
         """
         Verifies an OTP token with optional custom options.
 
@@ -125,12 +132,14 @@ class Otp:
             - OtpResp: An object representing the response of the OTP token verification operation.
             - Error: An object representing the error response of the OTP token verification operation.
         """
-        opt = (ReqOpts.Builder()
-               .with_api_key(self._lib.api_key)
-               .with_base_url(self._lib.base_url)
-               .with_http_client(self._lib.http)
-               .with_user_agent(self._lib.user_agent)
-               .build())
+        opt = (
+            ReqOpts.Builder()
+            .with_api_key(self._lib.api_key)
+            .with_base_url(self._lib.base_url)
+            .with_http_client(self._lib.http)
+            .with_user_agent(self._lib.user_agent)
+            .build()
+        )
 
         if opts:
             opt = opts
@@ -138,17 +147,19 @@ class Otp:
         qp = {
             "phone": otp_token_req.phone,
             "token": otp_token_req.token,
-            "consume": otp_token_req.consume
+            "consume": otp_token_req.consume,
         }
 
         t_url = self._lib.prepare_url("/api/mslm_otp/v1/token_verify", qp, opt)
-        resp = self._lib.req_and_resp(t_url, opt, method='POST', data=qp)
+        resp = self._lib.req_and_resp(t_url, opt, method="POST", data=qp)
         resp_data = json.loads(resp.text)
 
         status_code = resp.status_code
         if status_code == 429:
             return None, RequestQuotaExceededError()
         if status_code != 200:
-            return None, MslmError(status_code, resp_data.get("msg", "API request failed"))
+            return None, MslmError(
+                status_code, resp_data.get("msg", "API request failed")
+            )
 
         return OtpTokenVerifyResp(**resp_data), None

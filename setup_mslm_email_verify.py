@@ -8,15 +8,14 @@ LONG_DESCRIPTION = """
     """
 
 setup(
-    name='mslm-email-verify',
-    version='1.0.0',
-    description='Mslm Email Verify Python Library',
+    name="mslm-email-verify",
+    version="1.0.0",
+    description="Mslm Email Verify Python Library",
     long_description=LONG_DESCRIPTION,
-    home_page='https://mslm.io',
-    author='Mslm',
-    author_email='support@mslm.io',
-    license='MIT',
-    packages=['mslm_email_verify', 'lib'],
-    install_requires=['requests', 'dataclasses'],
-    package_dir={"": ".."},
+    url="https://mslm.io",
+    author="Mslm",
+    author_email="support@mslm.io",
+    license="MIT",
+    packages=["mslm_email_verify", "lib"],
+    install_requires=["requests", "dataclasses"],
 )

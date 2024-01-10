@@ -26,7 +26,7 @@ class Lib:
 
     gson = None
 
-    def __init__(self, api_key:str):
+    def __init__(self, api_key: str):
         """
         Initializes a Lib object with an optional API key.
 
@@ -105,11 +105,13 @@ class Lib:
         http_url_builder = urlparse(t_url.geturl())
 
         for key, value in qp.items():
-            http_url_builder = http_url_builder._replace(query=f"{http_url_builder.query}&{key}={value}")
+            http_url_builder = http_url_builder._replace(
+                query=f"{http_url_builder.query}&{key}={value}"
+            )
 
         return urlparse(http_url_builder.geturl())
 
-    def req_and_resp(self, t_url, opt, method='GET', data=None):
+    def req_and_resp(self, t_url, opt, method="GET", data=None):
         """
         Makes an HTTP request and returns the response.
 
@@ -124,13 +126,17 @@ class Lib:
         """
         headers = {"User-Agent": opt.get_user_agent()}
 
-        if method.upper() == 'GET':
+        if method.upper() == "GET":
             response = self.http.get(t_url.geturl(), headers=headers)
-        elif method.upper() == 'POST':
+        elif method.upper() == "POST":
             headers["Content-Type"] = "application/json"
             json_data = json.dumps(data) if data else None
-            response = self.http.post(t_url.geturl(), headers=headers, data=json_data)
+            response = self.http.post(
+                t_url.geturl(), headers=headers, data=json_data
+            )
         else:
-            raise ValueError("Invalid HTTP method. Supported methods are GET and POST.")
+            raise ValueError(
+                "Invalid HTTP method. Supported methods are GET and POST."
+            )
 
         return response

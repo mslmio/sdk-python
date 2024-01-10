@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class MslmError(Exception):
     """
@@ -21,7 +22,7 @@ class MslmError(Exception):
 @dataclass
 class RequestQuotaExceededError(MslmError):
     """
-        Error raised when the request quota for the API key has been exceeded.
+    Error raised when the request quota for the API key has been exceeded.
     """
 
     code: int = 429

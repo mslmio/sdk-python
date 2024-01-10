@@ -18,7 +18,7 @@ class Mslm:
         - set_api_key(self, api_key): Sets the API key for all services.
     """
 
-    def __init__(self, api_key:str):
+    def __init__(self, api_key: str):
         """
         Initializes a Mslm object with instances of EmailVerify, Otp, and Lib services.
 

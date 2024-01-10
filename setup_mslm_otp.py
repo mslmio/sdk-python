@@ -8,15 +8,14 @@ LONG_DESCRIPTION = """
     """
 
 setup(
-    name='mslm-otp',
-    version='1.0.0',
-    description='Mslm OTP Python Library',
+    name="mslm-otp",
+    version="1.0.0",
+    description="Mslm OTP Python Library",
     long_description=LONG_DESCRIPTION,
-    home_page='https://mslm.io',
-    author='Mslm',
-    author_email='support@mslm.io',
-    license='MIT',
-    packages=['mslm_otp', 'lib'],
-    install_requires=['requests', 'dataclasses'],
-    package_dir={"": ".."},
+    url="https://mslm.io",
+    author="Mslm",
+    author_email="support@mslm.io",
+    license="MIT",
+    packages=["mslm_otp", "lib"],
+    install_requires=["requests", "dataclasses"],
 )

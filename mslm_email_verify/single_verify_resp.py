@@ -35,7 +35,7 @@ class SingleVerifyResp:
     disposable: bool
     free: bool
     role: bool
-    mx: List['SingleVerifyRespMx']  # Forward declaration for type hint
+    mx: List["SingleVerifyRespMx"]  # Forward declaration for type hint
 
     def __str__(self):
         """

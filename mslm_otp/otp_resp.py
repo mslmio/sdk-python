@@ -26,15 +26,19 @@ class OtpResp:
 
 class OtpSendResp(OtpResp):
     """
-        Data class representing the response of an OTP sending operation.
+    Data class representing the response of an OTP sending operation.
     """
+
     def __str__(self):
         return f"OtpSendResp{{code='{self.code}', message='{self.msg}'}}"
 
 
 class OtpTokenVerifyResp(OtpResp):
     """
-        Data class representing the response of an OTP token verification operation.
+    Data class representing the response of an OTP token verification operation.
     """
+
     def __str__(self):
-        return f"OtpTokenVerifyResp{{code='{self.code}', message='{self.msg}'}}"
+        return (
+            f"OtpTokenVerifyResp{{code='{self.code}', message='{self.msg}'}}"
+        )

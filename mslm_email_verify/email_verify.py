@@ -30,14 +30,14 @@ class EmailVerify:
         ev_resp, ev_err = email_verifier.single_verify("example@example.com", opts)
     """
 
-    def __init__(self, api_key:str):
+    def __init__(self, api_key: str):
         """
         Initializes an EmailVerify object with an API key.
 
         Parameters:-
             - api_key (str): The API key used for authentication.
         """
-        self._lib = Lib(api_key) # Private attribute
+        self._lib = Lib(api_key)  # Private attribute
 
     def set_http_client(self, http_client):
         """
@@ -57,7 +57,7 @@ class EmailVerify:
         """
         self._lib.set_user_agent(user_agent)
 
-    def set_api_key(self, api_key:str):
+    def set_api_key(self, api_key: str):
         """
         Sets the API key for authentication.
 
@@ -66,7 +66,9 @@ class EmailVerify:
         """
         self._lib.set_api_key(api_key)
 
-    def single_verify(self, email:str, opts:ReqOpts=None)-> (SingleVerifyResp, MslmError):
+    def single_verify(
+        self, email: str, opts: ReqOpts = None
+    ) -> (SingleVerifyResp, MslmError):
         """
         Performs a single email verification with optional request options.
 
@@ -78,12 +80,14 @@ class EmailVerify:
             - SingleVerifyResp: An object representing the response of the email verification.
             - Exception: An object representing and error during the API request.
         """
-        opt = (ReqOpts.Builder()
-                .with_api_key(self._lib.api_key)
-                .with_base_url(self._lib.base_url)
-                .with_http_client(self._lib.http)
-                .with_user_agent(self._lib.user_agent)
-                .build())
+        opt = (
+            ReqOpts.Builder()
+            .with_api_key(self._lib.api_key)
+            .with_base_url(self._lib.base_url)
+            .with_http_client(self._lib.http)
+            .with_user_agent(self._lib.user_agent)
+            .build()
+        )
 
         if opts:
             opt = opts

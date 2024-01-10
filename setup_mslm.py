@@ -8,15 +8,14 @@ LONG_DESCRIPTION = """
     """
 
 setup(
-    name='mslm',
-    version='1.0.0',
-    description='Mslm Python Library',
+    name="mslm",
+    version="1.0.0",
+    description="Mslm Python Library",
     long_description=LONG_DESCRIPTION,
-    home_page='https://mslm.io',
-    author='Mslm',
-    author_email='support@mslm.io',
-    license='MIT',
-    packages=['mslm', 'lib', 'mslm_email_verify', 'mslm_otp'],
-    install_requires=['requests', 'dataclasses'],
-    package_dir={"": ".."},
+    url="https://mslm.io",
+    author="Mslm",
+    author_email="support@mslm.io",
+    license="MIT",
+    packages=["mslm", "lib", "mslm_email_verify", "mslm_otp"],
+    install_requires=["requests", "dataclasses"],
 )

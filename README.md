@@ -109,6 +109,11 @@ These errors can be accessed as follows:
 - `mslm_otp.MslmError`
 - `mslm_otp.RequestQuotaExceededError`
 
+### Scripts
+We provide a few scripts for development purposes.
+- `scripts/generate_requirements.sh`: Generates the requirements.txt file.
+- `scripts/publish.sh`: Builds and publishes the package to PyPI.
+- `scripts/fmt.sh`: Formats the code using black.
 
 ## About Mslm
 Mslm focuses on producing world-class business solutions. It’s the
