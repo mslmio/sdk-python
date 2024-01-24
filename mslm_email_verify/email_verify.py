@@ -1,6 +1,8 @@
 import json
 
-from lib import Lib, ReqOpts, MslmError, RequestQuotaExceededError
+from mslm_lib.lib import Lib
+from mslm_lib.req_opts import ReqOpts
+from mslm_lib.mslm_errors import MslmError, RequestQuotaExceededError
 from .single_verify_resp import SingleVerifyResp
 
 

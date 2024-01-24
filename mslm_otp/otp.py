@@ -1,6 +1,8 @@
 import json
 
-from lib import Lib, ReqOpts, MslmError, RequestQuotaExceededError
+from mslm_lib.lib import Lib
+from mslm_lib.req_opts import ReqOpts
+from mslm_lib.mslm_errors import MslmError, RequestQuotaExceededError
 from .otp_send_req import OtpSendReq
 from .otp_resp import OtpSendResp, OtpTokenVerifyResp
 from .otp_token_verify_req import OtpTokenVerifyReq
