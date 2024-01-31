@@ -5,23 +5,8 @@ The official Python SDK for the Mslm APIs.
 ## Installation
 To install the main library, use the following command:
 ```bash
-pip install .\mslm
+pip install mslm
 ```
-
-Alternatively, you can install each service individually:
-
-### Email Verify:
-```bash
-pip install .\mslm_email_verify
-```
-
-### OTP:
-```bash
-pip install .\mslm_otp
-```
-Choose the specific service(s) you need based on your 
-requirements and enjoy seamless integration into your project.
-
 
 ## Usage
 ```python
