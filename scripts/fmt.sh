@@ -8,5 +8,5 @@ black -l 79 \
     $DIR/../mslm \
     $DIR/../mslm_email_verify \
     $DIR/../mslm_otp \
-    $DIR/../lib \
+    $DIR/../mslm_lib \
 
