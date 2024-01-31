@@ -9,7 +9,7 @@ LONG_DESCRIPTION = """
 
 
 setup(
-    name="mslm-test-haris-m",
+    name="mslm",
     version="1.0.0",
     description="Mslm Python Library",
     long_description=LONG_DESCRIPTION,
