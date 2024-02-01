@@ -3,7 +3,7 @@
 echo "Building mslm..."
 python3 setup.py sdist bdist_wheel
 
-echo "Uploading ..."
+echo "Uploading..."
 twine upload dist/*
 
 echo "Cleaning up..."
