@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Building mslm..."
+echo "Building..."
 python3 setup.py sdist bdist_wheel
 
 echo "Uploading..."
