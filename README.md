@@ -7,6 +7,12 @@ To install the main library, use the following command:
 ```bash
 pip install mslm
 ```
+or
+Install `email_verify` and `otp` separately.
+```bash
+pip install mslm-email-verify
+pip install mslm-otp
+```
 
 ## Usage
 ```python
@@ -57,7 +63,7 @@ Each service can be imported individually as well.
 import mslm_email_verify
 
 # Initialize the EmailVerify object with your API key.
-ev = mslm_email_verify.EmailVerify("api_key")
+mslm_email_verify_instance = mslm_email_verify.EmailVerify("api_key")
 ```
 
 #### OTP
@@ -66,7 +72,7 @@ ev = mslm_email_verify.EmailVerify("api_key")
 import mslm_otp
 
 # Initialize the Otp object with your API key.
-o = mslm_otp.Otp("api_key")
+mslm_otp_instance = mslm_otp.Otp("api_key")
 ```
 
 
