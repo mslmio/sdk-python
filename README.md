@@ -1,6 +1,20 @@
 # Mslm Python SDK
 
-The official Python SDK for the Mslm APIs.
+The official Python SDK for Mslm APIs.
+
+## Requirements
+
+Before you start using the Mslm Python SDK, ensure that you have the following:
+
+- **Python:** The SDK is compatible with Python 3.6 and above.
+
+- **API Key:** Mslm's APIs require an API key. If you don't have one, please follow the [Authentication](https://mslm.io/docs/api/authentication) documentation to obtain an API key.
+
+## Authentication
+
+Mslm's APIs require an API key. If you don't have one, please read
+[Authentication](https://mslm.io/docs/api/authentication) to understand how to
+get an API key before continuing.
 
 ## Installation
 To install the main library, use the following command:
@@ -8,7 +22,7 @@ To install the main library, use the following command:
 pip install mslm
 ```
 or
-Install `email_verify` and `otp` separately.
+Install `mslm-email-verify` and `mslm-otp` separately.
 ```bash
 pip install mslm-email-verify
 pip install mslm-otp
@@ -102,13 +116,43 @@ These errors can be accessed as follows:
 
 ### Scripts
 We provide a few scripts for development purposes.
-- `scripts/generate_requirements.sh`: Generates the requirements.txt file.
 - `scripts/publish.sh`: Builds and publishes the package to PyPI.
 - `scripts/fmt.sh`: Formats the code using black.
 
+## Additional Resources
+
+See the official [API Reference Documentation](https://mslm.io/docs/api) for
+details on each API's actual interface, which is implemented by this SDK.
+
+## Contributing
+
+See [CONTRIBUTING](CONTRIBUTING.md) for more information.
+
+## Security
+
+See [Security Issue
+Notifications](CONTRIBUTING.md#security-issue-notifications) for more
+information.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
 ## About Mslm
-Mslm focuses on producing world-class business solutions. It’s the
-bread-and-butter of our business to prioritize quality on everything we touch.
-Excellence is a core value that defines our culture from top to bottom.
+
+At Mslm, we're all about making things better. Where others see norm, we see
+opportunity.
+
+We build world-class solutions to the toughest problems. Excellence is a core
+value that defines our approach from top to bottom.
+
+We're all about creating positive value for ourselves, our partners and our
+societies.
+
+We do it by focusing on quality and the long-term, while intelligently
+maneuvering the complex realities of day-to-day business.
+
+Our partners share our perspective, and we jointly produce truly world-class
+solutions to the toughest problems.
 
 [![image](https://avatars.githubusercontent.com/u/50307970?s=200&v=4)](https://mslm.io/)
