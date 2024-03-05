@@ -8,8 +8,6 @@ Before you start using the Mslm Python SDK, ensure that you have the following:
 
 - **Python:** The SDK is compatible with Python 3.6 and above.
 
-- **API Key:** Mslm's APIs require an API key. If you don't have one, please follow the [Authentication](https://mslm.io/docs/api/authentication) documentation to obtain an API key.
-
 ## Authentication
 
 Mslm's APIs require an API key. If you don't have one, please read
@@ -18,36 +16,38 @@ get an API key before continuing.
 
 ## Installation
 To install the main library, use the following command:
+
 ```bash
 pip install mslm
 ```
-or
-Install `mslm-email-verify` and `mslm-otp` separately.
+
+Or install specific packages like `mslm-email-verify` and `mslm-otp` separately:
+
 ```bash
 pip install mslm-email-verify
 pip install mslm-otp
 ```
 
 ## Usage
+
 ```python
 import mslm
 
 # Initialize the Mslm object with your API key.
-mslm_instance = mslm.Mslm("api_key")
+client = mslm.Mslm("api_key")
 ```
 
 #### Email Verify
   - Single Verify
   ```python
-    single_verify_response, error = mslm_instance.email_verify.single_verify("support@mslm.io")
-    # single_verify_response: SingleVerifyResp, error: Error
+    resp, error = client.email_verify.single_verify("support@mslm.io")
   ```
 
 #### OTP
   - Sending an OTP.
   ```python
   # Create an OtpSendReq object.
-  otp_send_request = mslm_instance.otp.OtpSendReq(
+  otp_send_request = client.otp.OtpSendReq(
     phone="+923214444444",
     tmpl_sms="Your verification code is {token}",
     token_len=6,
